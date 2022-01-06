@@ -12,6 +12,9 @@ LeaderstatsHandler.Players = {
 	]]
 }
 local isReady = script.Ready
+if not isReady then
+	warn("Could not find the isReady BindableEvent. By default, this should be a direct child of the LeaderstatsHandler")
+end
 local Players = game:GetService("Players")
 local VERSION_NUMBER = 1
 local DataStoreService = game:GetService("DataStoreService")
@@ -103,7 +106,7 @@ end
 function LeaderstatsHandler.Init(STAT, STAT_TYPE, DEFAULT_VALUE)
 	local function get(player)
 		local value = LeaderstatsHandler:getValue(player, STAT, STAT_TYPE, DEFAULT_VALUE)
-		return value
+		return value or DEFAULT_VALUE
 	end
 	
 	local function update(player, newValue)
